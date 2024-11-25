@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+      driver-class-name: ${EL.datasource.driver-class-name}
+      url: jdbc:mysql://${EL.datasource.host}:${EL.datasource.port}/${EL.datasource.database}
+      username: ${EL.datasource.username}
+      password: ${EL.datasource.password}
+  data:
+    redis:
+      host: ${EL.data.redis.host}
+      port: ${EL.data.redis.port}
+      password: ${EL.data.redis.password}
+      database: ${EL.data.redis.database}
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.EL.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com:
+      EL:
+        mapper: debug
+        service: info
+        controller: info
+
+EL:
+  jwt:
+    admin-secret-key: itcast
+    admin-ttl: 7200000
+    admin-token-name: token
